@@ -1,6 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Formm from '../../Component/form'
 import Head from '../../Component/head.js';
+import useInput from '../../hook/custom-hook.js';
+import axios from 'axios';
+
+import 'react-quill/dist/quill.snow.css';
 import {  Col, 
           Button, 
           Form, 
@@ -15,10 +19,42 @@ import {  Col,
           Row  } 
           from 'reactstrap';
 
-export default function AdminDashBoardCourse () {
+
+function AddCourse() {
+
+            const { inputs, handleInputChange } = useInput({ 
+              courseName: 'no', 
+              courseDescription: 'no', 
+              courseInstructor: 'no', 
+              courseLevel: 'no', 
+              courseSubject: 'no',
+              courseImage:'no',
+              coursePrice:'no',
+              discount:'no',
+              courseActive:'no',
+
+               });
+          
+              async function handleSubmit () {
+              
+              console.log(inputs)
+              await axios
+              .post("/api/course", inputs)
+              .then(res => {
+                console.log(res)
+              })
+              .catch(err => {
+                console.log(err);
+              })
+              
+              alert("เพิ่มข้อมูลเรียบร้อยแล้ว");
+          }
+          
+ 
+function adminDashBoardCourse () {
       return (
         <div style={{marginTop: '20px'}}>
-        <Head title="Shop - Project Lab" />
+        <Head title="Add Course - Project Lab" />
         <Formm>
         <br/>
         <Container>
@@ -26,7 +62,7 @@ export default function AdminDashBoardCourse () {
             <Col sm ="2">
             <div>
                     <h2>หมวดหมู่</h2>
-                    <h4 style={{marginLeft:"10px"}}>Shop</h4>
+                    <h4 style={{marginLeft:"10px"}}>Course</h4>
                     <Nav vertical pills>
                         <NavItem>
                             <NavLink href="/AdminDashBoard/adminDashBoardShop" >เพิ่มสินค้า</NavLink>
@@ -37,6 +73,8 @@ export default function AdminDashBoardCourse () {
                         <h4 style={{marginLeft:"10px"}}>Course</h4>
                             <NavLink href="/AdminDashBoard/adminDashBoardCourse" active >เพิ่ม Course</NavLink>
                             <NavLink href="/AdminDashBoard/showItemCourse">แก้ไข/แสดง Course</NavLink>
+                            <NavLink href="/AdminDashBoard/addTextEditer">เพิ่ม TextEditCourse</NavLink>
+                            <NavLink href="/AdminDashBoard/editTextEditer">แก้ไข/แสดง TextEditCourse</NavLink>
 
                         </NavItem>
                     </Nav>
@@ -45,18 +83,18 @@ export default function AdminDashBoardCourse () {
             <Col>
 
             <Form>
-              <h1>Course</h1>
+              <h1>Add Course</h1>
         <FormGroup row>
           
-          <Label for="exampleName" sm={2}>Name</Label>
+          <Label for="courseName" sm={2}>Name</Label>
           <Col sm={10}>
-            <Input type="text" name="email" id="exampleEmail" placeholder="Name" />
+            <Input type="text" name="courseName" id="courseName" placeholder="Name"  onChange={handleInputChange}/>
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="exampleCategory" sm={2}>Category</Label>
+          <Label for="courseLevel" sm={2}>Level</Label>
           <Col sm={10}>
-            <Input type="select" name="select" id="exampleCategory" >
+            <Input type="select" name="courseLevel" id="courseLevel" onChange={handleInputChange} >
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -68,9 +106,9 @@ export default function AdminDashBoardCourse () {
         </FormGroup>
 
         <FormGroup row>
-          <Label for="exampleText" sm={2}>Text Area</Label>
+          <Label for="courseSubject" sm={2}>Course Subject</Label>
           <Col sm={10}>
-            <Input type="textarea" name="text" id="exampleText" />
+            <Input type="textarea" name="courseSubject" id="courseSubject" onChange={handleInputChange}/>
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -117,12 +155,14 @@ export default function AdminDashBoardCourse () {
             </FormGroup>
           </Col>
         </FormGroup>
-        <FormGroup check row>
-          <Col sm={{ size: 10, offset: 2 }}>
-            <Button color="dark" >Submit</Button>
-          </Col>
-        </FormGroup>
       </Form>
+      <FormGroup check row>
+        <Col >
+            <Button type="submit" color="pimary" onClick={() => handleSubmit()} >Submit</Button>
+          </Col>
+      
+        </FormGroup>
+      
             </Col>
             </Row>
         </Container>
@@ -130,3 +170,13 @@ export default function AdminDashBoardCourse () {
         </div>
       );
   }
+
+  return(
+    <div>
+      {adminDashBoardCourse()}
+    </div>
+  )
+
+  }
+
+export default AddCourse;

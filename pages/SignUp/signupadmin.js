@@ -80,15 +80,15 @@ function AddUser() {
   }
   }
 
-function  Signup ()  {
+function  Signupadmin ()  {
     return (
       <div>
         <Head title="Signup - Project Lab" />
         <Formm >
-        <div >
+        <div className="border-loginform">
           <Form  action="/index" className="login-form">
             <h1 className = "text-center" >
-              <span className="font-weight-bold" >SIGN UP</span>
+              <span className="font-weight-bold" >SIGN UP Admin</span>
             </h1>
           <AvForm>
             <Row>
@@ -152,7 +152,7 @@ function  Signup ()  {
 }
 return(
     <div>
-      {Signup()}
+      {Signupadmin()}
     </div>
 )
    

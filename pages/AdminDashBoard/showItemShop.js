@@ -61,6 +61,8 @@ export default function ShowItemShop (props) {
                         <h4 style={{marginLeft:"10px"}}>Course</h4>
                             <NavLink href="/AdminDashBoard/adminDashBoardCourse">เพิ่ม Course</NavLink>
                             <NavLink href="/AdminDashBoard/showItemCourse">แก้ไข/แสดง Course</NavLink>
+                            <NavLink href="/AdminDashBoard/addTextEditer">เพิ่ม TextEditCourse</NavLink>
+                            <NavLink href="/AdminDashBoard/editTextEditer">แก้ไข/แสดง TextEditCourse</NavLink>
 
                         </NavItem>
                     </Nav>

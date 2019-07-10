@@ -42,7 +42,8 @@ router.post("/", async (req, res) => {
         password: req.body.password,
         CFpassword: req.body.CFpassword,
         phoneNumber: req.body.phoneNumber,
-        date: req.body.date
+        date: req.body.date,
+        role:"user"
   
     });
     bcrypt.genSalt(11, (err, salt) => {

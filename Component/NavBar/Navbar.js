@@ -50,9 +50,7 @@ import {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <div className="d-flex align-items-center">
-              <NavItem>
-                  <NavLink  href="/AdminDashBoard/adminDashBoardShop" >Add</NavLink>
-                </NavItem>
+
 
                 <NavItem>
                   <NavLink  href="/" >Home</NavLink>

@@ -4,7 +4,7 @@ const useInput = (initialValues, callback) => {
   const [inputs, setInputs] = useState(initialValues);
  
   const handleInputChange = (event) => {
-    event.persist();
+  event.persist();
     setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
   }
   return {

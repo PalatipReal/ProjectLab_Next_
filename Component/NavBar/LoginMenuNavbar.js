@@ -1,33 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
-  UncontrolledPopover,
-  PopoverHeader,
-  PopoverBody,
   Input,
   Form,
-  TabContent,
-  TabPane,
-  FormGroup,
-  Label,
-  Nav,
-  NavItem,
-  NavLink,
-  TabToggle,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  NavLink 
+
 } from "reactstrap";
 import jwt_decode from "jwt-decode";
 import Router from 'next/router';
-import uuid from "uuid";
-import classnames from "classnames";
 import { GlobalContext } from "../../hook/GlobalHook";
 import useInput from "../../hook/custom-hook.js";
 import axios from "axios";
 import Link from 'next/link'
 import styled from 'styled-components';
+
 const Wrapper = styled.div`
  min-width:300px;
  max-width:300px;
@@ -170,15 +160,22 @@ if(!GlobalHook.getglobalToken){
     );
   } 
   else {
-      console.log(GlobalHook.getglobalUser)
     return (
       <div>
-      <Wrapper>
+        
+        <Wrapper>
         <p>Hello:{GlobalHook.getglobalUser.Username}</p>
-        <Button color="red" onClick={() => handleLogoutSubmit()}>
+        {GlobalHook.getglobalUser.role=="admin"? <Link href="/AdminDashBoard/adminDashBoardShop" >
+          Admin Page
+        </Link>:
+        <div>User</div>}
+       
+       
+        <Button  color="red" onClick={() => handleLogoutSubmit()}>
           LogOut
-      </Button>
+            </Button>
       </Wrapper>
+
       </div>
 
 );

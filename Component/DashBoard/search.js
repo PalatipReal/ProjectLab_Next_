@@ -1,8 +1,8 @@
-import react,{Component,useState} from 'react';
+import react,{useState} from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Router from 'next/router';
-import {Button,Row,Col,ButtonGroup,Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap' ; 
+import {Button,ButtonGroup,Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap' ; 
 export default function Search (props) {
     const {productImage,productName,_id,fullPrice} = props.movie
     function changeMessage(){
@@ -14,7 +14,7 @@ export default function Search (props) {
     }   
         const[modal,setmodal] =useState(false)
 
-        function toggle() {
+        function toggleConfirmDelete() {
             setmodal(!modal)
           }
         async function Delete(){
@@ -29,6 +29,7 @@ export default function Search (props) {
             console.log(err);
             })
             setmodal(!modal)
+            location.reload(true);
         }
         
         function Edit(){
@@ -40,7 +41,6 @@ export default function Search (props) {
                         },
               }) 
         }
-
 
         return(
             
@@ -61,15 +61,15 @@ export default function Search (props) {
 
                         <ButtonGroup size="xl">
                             <Button onClick={Edit} color="primary">Edit</Button> 
-                            <Button onClick={toggle} size="sm" color="danger">Delete</Button>
-                            <Modal isOpen={modal} toggle={toggle}>
-                            <ModalHeader toggle={toggle}>ยืนยันที่จะลบ?</ModalHeader>
+                            <Button onClick={toggleConfirmDelete} size="sm" color="danger">Delete</Button>
+                            <Modal isOpen={modal} toggle={toggleConfirmDelete}>
+                            <ModalHeader toggle={toggleConfirmDelete}>ยืนยันที่จะลบ?</ModalHeader>
                             <ModalBody>
                                 ต้องการที่จะลบ {productName} 
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="primary" onClick={Delete}>Delete</Button>
-                                <Button color="secondary" onClick={toggle}>Cancel</Button>
+                                <Button color="secondary" onClick={toggleConfirmDelete}>Cancel</Button>
                             </ModalFooter>
                             </Modal>
                         </ButtonGroup>

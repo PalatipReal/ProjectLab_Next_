@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ProductSchema = new Schema({
-  _id: Schema.Types.ObjectId,
+  
   productUPC: {
     type: String,
     required: true

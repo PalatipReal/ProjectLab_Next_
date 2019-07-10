@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const Product = require('./routes/api/Product');
 const User = require('./routes/api/User');
+const Course = require('./routes/api/Course');
 const passport = require('passport');
 
 ///////////////
@@ -46,6 +47,7 @@ app
     ////////////////
     server.use("/api/product", Product);
     server.use("/api/user", User);
+    server.use("/api/course", Course);
 
 
     //////////////////

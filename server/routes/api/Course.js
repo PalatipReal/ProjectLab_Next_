@@ -1,24 +1,50 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const ProductSchema = require("../../models/Product");
+const CourseSchema = require("../../models/Course");
 /////////
-const Product = mongoose.model("product", ProductSchema);
+const Course = mongoose.model("course", CourseSchema);
 
 ///////
 
 //////
 
-router.get("/test", (req, res) => res.json({ msg: "Product Works" }));
+router.get("/test", (req, res) => res.json({ msg: "Course Works" }));
 
 //GetProduct
 router.get("/", async (req, res) => {
-  Product.find().then(data => {
+  Course.find().then(data => {
     res.status(200).json(data);
   });
 });
+router.post("/", async (req, res) => {
+  const newCourse = new Course({
+    courseName: req.body.courseName,
+    courseDescription: req.body.courseDescription,
+    courseInstructor: req.body.courseInstructor,
+    courseLevel: req.body.courseLevel,
+    courseSubject: req.body.courseSubject,
+    courseImage: req.body.courseImage,
+    coursePrice: req.body.coursePrice,
+    discount: req.body.discount,
+    courseActive: req.body.courseActive,
 
+  });
+    newCourse.save().then(data => {
+      res.status(200).json(data);
+    });
+});
 
+router.post("/TextEditer", async (req, res) => {
+  const newCourse = new Course({
+    courseTextEditer: req.body.courseTextEditer
+
+  });
+    newCourse.findOneAndUpdate().then(data => {
+      res.status(200).json(data);
+    });
+});
+/*
 router.post("/search", async (req, res) => {
   if(req.body.keyword){
   Product.find({ "productName": { "$regex": req.body.keyword, "$options": "i" } }).then(data => {
@@ -47,7 +73,6 @@ router.post("/item", async (req, res) => {
 
 //add
 router.post("/", async (req, res) => {
-  console.log("NewProduct"+req.body.productName)
   const newProduct = new Product({
     productUPC: req.body.productUPC,
     productImage: req.body.productImage,
@@ -89,6 +114,10 @@ router.patch("/:productId", (req, res, next) => {
 });
   
 router.post("/del", (req, res, next) => {
+  console.log("ggggggggggggg")
+  console.log(req)
+  console.log(req.body);
+  console.log(req.body._id);
   const id = req.body._id;
   console.log(id);
   Product.findByIdAndDelete({ _id: id })
@@ -103,5 +132,5 @@ router.post("/del", (req, res, next) => {
       });
     });
 });
-
+*/
 module.exports = router;
